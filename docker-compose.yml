@@ -1,0 +1,40 @@
+version: '3.8'
+services:
+  db:
+    image: postgres:14
+    container_name: todolist_db_prod
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - todolist_network
+  
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: todolist_app
+    environment:
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_NAME: ${DB_NAME}
+      DB_HOST: db
+      DB_PORT: 5432
+    ports:
+      - "8000:3000"
+    depends_on:
+      - db
+    networks:
+      - todolist_network
+    command: >
+      sh -c "npx sequelize-cli db:migrate && npm run start"
+
+volumes:
+  db_data:
+networks:
+  todolist_network:
