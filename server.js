@@ -7,8 +7,15 @@ const app = express();  // Create an Express app
 app.use(express.json());  // Enable JSON body parsing
 app.use('/api/v1', tasksRouter);  // Use the API routes
 
+// Connect to db and synchronize models based on environment
+const isProduction = process.env.NODE_ENV === 'production';
+const isDevelopment = process.env.NODE_ENV === 'development';
+
 // Connect to db and synchronize models
-sequelize.sync()
+sequelize.sync({
+  force: isDevelopment,
+  alter: isProduction,
+})
   .then(() => {
     console.log('Database connected and synced');
   })

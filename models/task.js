@@ -1,26 +1,44 @@
 import {DataTypes} from 'sequelize';
 import sequelize from '../config/db.js';
 
+
 const Task = sequelize.define('Task', {
+    id: {
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
+      primaryKey: true,
+    },
     title: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    description: {
-      type: DataTypes.TEXT,
-    },
-    status: {
+    prioprity: {
       type: DataTypes.STRING,
       allowNull: false,
-      defaultValue: 'pending',
+      defaultValue: 'Low',
     },
-    created_at: {
+    description: {  
+      type: DataTypes.TEXT,
+    },
+    isDone: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: 'false',
+      field: 'is_done',
+    },
+    createdAt: {
       type: DataTypes.DATE,
       defaultValue: DataTypes.NOW,
+      field: 'created_at',
     },
-    updated_at: {
+    updatedAt: {
       type: DataTypes.DATE,
       defaultValue: DataTypes.NOW,
+      field: 'updated_at',
+    },
+    dueDate: {
+      type: DataTypes.DATE,
+      field: 'due_date',
     },
   }, {
     tableName: 'tasks',
