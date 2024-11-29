@@ -2,8 +2,15 @@ import './config/envConfig.js';
 import express from 'express';
 import tasksRouter from './routes/tasks.js';
 import sequelize from './config/db.js';
+import cors from 'cors';
 
 const app = express();  // Create an Express app
+app.use(cors({
+  origin: process.env.CLIENT_URL,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+}));
+
 app.use(express.json());  // Enable JSON body parsing
 app.use('/api/v1', tasksRouter);  // Use the API routes
 
