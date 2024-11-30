@@ -5,6 +5,10 @@ class TaskService {
         return await taskRepository.getAllTasks(limit, offset);
     }
 
+    async getTaskByStatus(isDone) {
+        return await taskRepository.getTaskByStatus(isDone);
+    }
+
     async getTaskById(id) {
         return await taskRepository.getTaskById(id);
     }

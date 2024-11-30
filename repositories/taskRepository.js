@@ -13,8 +13,17 @@ class TaskRepository {
     return await Task.findByPk(id);
   }
 
+  async getTaskByStatus(isDone) {
+    return await Task.findAll({
+      where: {
+        isDone: isDone,
+      },
+    });
+  }
+
   async createTask(task) {
     return await Task.create(task);
+    // return await Task.bulkCreate(task);
   }
 
   async updateTask(id, task) {

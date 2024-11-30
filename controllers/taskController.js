@@ -21,6 +21,15 @@ class TaskController {
         }
     }
 
+    async getTaskByStatus(req, res) {
+        try {
+            const task = await taskService.getTaskByStatus(req.params.isDone);
+            res.json(task);
+        } catch (error) {
+            return res.status(404).json({ message: error.message });
+        }
+    }
+
     async createTask(req, res) {
         try {
             const task = await taskService.createTask(req.body);
