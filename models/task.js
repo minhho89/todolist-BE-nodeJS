@@ -14,15 +14,16 @@ const Task = sequelize.define('Task', {
     },
     prioprity: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
       defaultValue: 'Low',
     },
     description: {  
       type: DataTypes.TEXT,
+      allowNull: true,
     },
     isDone: {
       type: DataTypes.BOOLEAN,
-      allowNull: false,
+      allowNull: true,
       defaultValue: 'false',
       field: 'is_done',
     },
@@ -39,6 +40,7 @@ const Task = sequelize.define('Task', {
     dueDate: {
       type: DataTypes.DATE,
       field: 'due_date',
+      allowNull: true,
     },
   }, {
     tableName: 'tasks',

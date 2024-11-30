@@ -112,4 +112,4 @@ lint-staged.config.js
 *.log
 *.swp
 
-.env.*
+.env.development
