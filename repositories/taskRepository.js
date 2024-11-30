@@ -13,7 +13,7 @@ class TaskRepository {
     return await Task.findByPk(id);
   }
 
-  async getTaskByStatus(isDone) {
+  async getTasksByStatus(isDone) {
     return await Task.findAll({
       where: {
         isDone: isDone,
