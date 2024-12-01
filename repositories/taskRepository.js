@@ -44,6 +44,14 @@ class TaskRepository {
       },
     });
   }
+
+  async countTaskByStatus(isDone) {
+    return await Task.count({
+      where: {
+        isDone: isDone,
+      },
+    });
+  }
 }
 
 export default new TaskRepository();

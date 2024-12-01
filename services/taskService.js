@@ -24,6 +24,10 @@ class TaskService {
     async deleteTask(id) {
         return await taskRepository.deleteTask(id);
     }
+
+    async countTaskByStatus(isDone) {
+        return await taskRepository.countTaskByStatus(isDone);
+    }
 }
 
 export default new TaskService();

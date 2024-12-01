@@ -56,6 +56,16 @@ class TaskController {
             return res.status(404).json({ message: error.message });
         }
     }
+
+    async countTaskByStatus(req, res) {
+        try {
+            console.log(req.params);
+            const tasks = await taskService.countTaskByStatus(req.params.isDone);
+            return res.json(tasks);
+        } catch (error) {
+            return res.status(404).json({ message: error.message });
+        }
+    }
 }
 
 export default new TaskController();
