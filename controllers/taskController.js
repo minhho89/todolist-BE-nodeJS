@@ -23,7 +23,7 @@ class TaskController {
 
     async getTasksByStatus(req, res) {
         try {
-            const task = await taskService.getTasksByStatus(req.params.isDone);
+            const task = await taskService.getTasksByStatus(req.params.isDone, req.query.limit, req.query.page);
             res.json(task);
         } catch (error) {
             return res.status(404).json({ message: error.message });

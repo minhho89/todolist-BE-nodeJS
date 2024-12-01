@@ -3,18 +3,21 @@ import Task from "../models/task.js";
 class TaskRepository {
   async getAllTasks(limit, offset) {
     return await Task.findAll({
-    limit: parseInt(limit),   
-    offset: parseInt(offset), 
-    order: [['created_at', 'DESC']], 
-  });
+      limit: parseInt(limit),
+      offset: parseInt(offset),
+      order: [["created_at", "DESC"]],
+    });
   }
 
   async getTaskById(id) {
     return await Task.findByPk(id);
   }
 
-  async getTasksByStatus(isDone) {
+  async getTasksByStatus(isDone, limit, page) {
+    //console.log({ isDone, limit, offset });
     return await Task.findAll({
+      limit: parseInt(limit),
+      offset: parseInt(page * limit),
       where: {
         isDone: isDone,
       },
@@ -23,7 +26,7 @@ class TaskRepository {
 
   async createTask(task) {
     return await Task.create(task);
-    // return await Task.bulkCreate(task);
+    //return await Task.bulkCreate(task);
   }
 
   async updateTask(id, task) {
