@@ -5,7 +5,7 @@ class TaskRepository {
     return await Task.findAll({
       limit: parseInt(limit),
       offset: parseInt(offset),
-      order: [["created_at", "DESC"]],
+      order: [["updated_at", "ASC"]],
     });
   }
 
@@ -21,6 +21,7 @@ class TaskRepository {
       where: {
         isDone: isDone,
       },
+      order: [["updated_at", "DESC"]],
     });
   }
 
